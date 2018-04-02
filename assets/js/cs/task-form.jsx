@@ -59,7 +59,7 @@ function TaskForm(props) {
         <option>Yes</option>
       </Input>   
     </FormGroup>
-    <Button onClick={submit} color="primary">Create Task</Button> &nbsp;
+    <Button onClick={submit} color="primary">Save Task</Button> &nbsp;
     <Button onClick={clear}>Clear</Button>
   </div>;
 }

@@ -20,6 +20,8 @@ function tasks(state = [], action) {
     return [...action.tasks];
   case 'ADD_POST':
     return [action.task, ...state];
+  case 'DELETE_TASK':
+    return [...action.tasks];
   default:
     return state;
   }
@@ -29,6 +31,8 @@ function users(state = [], action) {
   switch (action.type) {
   case 'USERS_LIST':
     return [...action.users];
+  case 'REGISTER_USER':
+    return [action.user, ...state];
   default:
     return state;
   }

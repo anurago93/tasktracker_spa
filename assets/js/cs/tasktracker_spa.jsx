@@ -7,6 +7,7 @@ import Nav from './nav';
 import Feed from './feed';
 import Users from './users';
 import TaskForm from './task-form';
+import RegisterForm from './registration-form';
 
 export default function tasktracker_spa_init(store) {
   ReactDOM.render(
@@ -24,12 +25,17 @@ let Tasktracker_spa = connect((state) => state)((props) => {
         <Nav />
         <Route path="/" exact={true} render={() =>
           <div>
-            <TaskForm />
             <Feed tasks={props.tasks} />
           </div>
         } />
         <Route path="/users" exact={true} render={() =>
           <Users users={props.users} />
+        } />
+        <Route path="/task" exact={true} render={() =>
+          <TaskForm />
+        } />
+        <Route path="/register" exact={true} render={() =>
+          <RegisterForm />
         } />
         <Route path="/users/:user_id" render={({match}) =>
           <Feed tasks={_.filter(props.tasks, (pp) =>

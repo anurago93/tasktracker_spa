@@ -61,7 +61,13 @@ function Nav(props) {
           <NavLink to="/" exact={true} activeClassName="active" className="nav-link">Feed</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/users" href="#" className="nav-link">All Users</NavLink>
+          <NavLink to="/users" href="#" className="nav-link">Users</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/register" href="#" className="nav-link">Register</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/task" href="#" className="nav-link">Create Task</NavLink>
         </NavItem>
       </ul>
       { session_info }

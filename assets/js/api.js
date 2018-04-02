@@ -29,6 +29,21 @@ class TheServer {
     });
   }
 
+  register_user(data) {
+    $.ajax("/api/v1/users", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ token: data.token, user: data }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'REGISTER_USER',
+          user: resp.data,
+        });
+      },
+    });
+  }
+
   submit_task(data) {
     $.ajax("/api/v1/tasks", {
       method: "post",
@@ -39,6 +54,20 @@ class TheServer {
         store.dispatch({
           type: 'ADD_POST',
           task: resp.data,
+        });
+      },
+    });
+  }
+
+  delete_task(data) {
+    $.ajax("/api/v1/tasks" + "/" + data, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(""),
+      success: (resp) => {
+        store.dispatch({
+          type: 'DELETE_TASK',
         });
       },
     });
