@@ -1,42 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import api from '../api';
 
 function TaskForm(props) {
-  console.log("props@TaskForm", props);
 
   function update(ev) {
     let tgt = $(ev.target);
 
     let data = {};
     data[tgt.attr('name')] = tgt.val();
-    console.log(tgt.val());
     let action = {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     props.dispatch(action);
   }
 
   function submit(ev) {
     api.submit_task(props.form);
-    console.log(props.form);
   }
 
-  function clear(ev) {
-    props.dispatch({
-      type: 'CLEAR_FORM',
-    });
-  }
-
-  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
+  let users = _.map(props.users, (uu) => <option key={uu.name} value={uu.name}>{uu.name}</option>);
   return <div style={{padding: "4ex"}}>
     <h2>New Task</h2>
     <FormGroup>
-      <Label for="user_id">Assign To</Label>
-      <Input type="select" name="user_id" value={props.form.user_id} onChange={update}>
+      <Input type="text" className="hidden" name="user_id" value={props.form.user_id} onChange={update} />
+    </FormGroup>
+    <FormGroup>
+      <Label for="name">Assign To</Label>
+      <Input type="select" name="name" value={props.form.name} onChange={update}>
         { users }
       </Input>
     </FormGroup>
@@ -59,13 +53,12 @@ function TaskForm(props) {
         <option>Yes</option>
       </Input>   
     </FormGroup>
-    <Button onClick={submit} color="primary">Save Task</Button> &nbsp;
-    <Button onClick={clear}>Clear</Button>
+    <Link to="/" className="btn btn-primary" onClick={submit} >Create Task</Link> &nbsp;
+    <Link to="/" className="btn btn-primary btn-danger cancel">Cancel</Link> &nbsp;
   </div>;
 }
 
 function state2props(state) {
-  console.log("rerender@TaskForm", state);
   return {
     form: state.form,
     users: state.users,

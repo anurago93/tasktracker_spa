@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Nav from './nav';
 import Feed from './feed';
-import Users from './users';
 import TaskForm from './task-form';
+import EditTaskForm from './edit-task-form';
 import RegisterForm from './registration-form';
 
 export default function tasktracker_spa_init(store) {
@@ -19,30 +19,37 @@ export default function tasktracker_spa_init(store) {
 }
 
 let Tasktracker_spa = connect((state) => state)((props) => {
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <Route path="/" exact={true} render={() =>
-          <div>
-            <Feed tasks={props.tasks} />
-          </div>
-        } />
-        <Route path="/users" exact={true} render={() =>
-          <Users users={props.users} />
-        } />
-        <Route path="/task" exact={true} render={() =>
-          <TaskForm />
-        } />
-        <Route path="/register" exact={true} render={() =>
-          <RegisterForm />
-        } />
-        <Route path="/users/:user_id" render={({match}) =>
-          <Feed tasks={_.filter(props.tasks, (pp) =>
-            match.params.user_id == pp.user.id )
+
+  if(props.token){
+    return (
+      <Router>
+        <div>
+          <Nav />
+          <Route path="/" exact={true} render={() =>
+            <div>
+              <EditTaskForm />
+              <Feed tasks={props.tasks} />
+            </div>
           } />
-        } />
-      </div>
-    </Router>
-  );
+          <Route path="/task" exact={true} render={() =>
+            <TaskForm />
+          } />
+        </div>
+      </Router>
+    );
+  }
+  else
+  { 
+    return (
+      <Router>
+        <div>
+          <Nav />
+          <h4 className="msg"> Please login if returning user or register if new user</h4>
+          <Route path="/register" exact={true} render={() =>
+            <RegisterForm />
+          } />
+        </div>
+      </Router>
+    );
+  }
 });

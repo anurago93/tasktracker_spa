@@ -4,19 +4,16 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import api from '../api';
 
 function RegisterForm(props) {
-  console.log("props@RegisterForm", props);
 
   function update(ev) {
     let tgt = $(ev.target);
 
     let data = {};
     data[tgt.attr('name')] = tgt.val();
-    console.log(tgt.val());
     let action = {
       type: 'UPDATE_FORM',
       data: data,
     };
-    console.log(action);
     props.dispatch(action);
   }
 
@@ -39,7 +36,7 @@ function RegisterForm(props) {
     </FormGroup>
     <FormGroup>
       <Label for="password">Enter your password</Label>
-      <Input type="password" name="password" value={props.form.password} onChange={update} />
+      <Input type="password" name="password" onChange={update} />
     </FormGroup>
     <Button onClick={submit} color="primary">Register</Button> &nbsp;
     <Button onClick={clear}>Clear</Button>
@@ -47,7 +44,6 @@ function RegisterForm(props) {
 }
 
 function state2props(state) {
-  console.log("rerender@RegisterForm", state);
   return {
     form: state.form,
     users: state.users,

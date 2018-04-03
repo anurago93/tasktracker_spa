@@ -23,6 +23,11 @@ import "phoenix_html";
 import store from './store';
 import api from './api';
 
+$(".nav .nav-link").on("click", function(){
+   $(".nav-link").find(".active").removeClass("active");
+   $(this).addClass("active");
+});
+
 import tasktracker_spa_init from "./cs/tasktracker_spa";
 $(function() {
   api.request_tasks();

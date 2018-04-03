@@ -59,16 +59,25 @@ class TheServer {
     });
   }
 
+  edit_task(data, id) {
+    $.ajax("/api/v1/tasks" + "/" + id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ task: data }),
+      success: (resp) => { 
+        this.request_tasks();
+      },
+    });
+  }
+
   delete_task(data) {
     $.ajax("/api/v1/tasks" + "/" + data, {
       method: "delete",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify(""),
-      success: (resp) => {
-        store.dispatch({
-          type: 'DELETE_TASK',
-        });
+      success: (resp) => {    
+        this.request_tasks();
       },
     });
   }

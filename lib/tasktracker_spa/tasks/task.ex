@@ -5,6 +5,7 @@ defmodule TasktrackerSpa.Tasks.Task do
 
   schema "tasks" do
     field :title, :string
+    field :name, :string
     field :completed, :string
     field :description, :string
     field :time, :integer, default: 0
@@ -16,7 +17,7 @@ defmodule TasktrackerSpa.Tasks.Task do
   @doc false
   def changeset(task, attrs) do
     task
-    |> cast(attrs, [:title, :user_id, :description, :time, :completed])
+    |> cast(attrs, [:title, :user_id, :description, :time, :completed, :name])
     |> validate_required([:title, :user_id, :description, :time])
   end
 end

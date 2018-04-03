@@ -25,11 +25,6 @@ defmodule Seeds do
     d = Repo.insert!(%User{ name: "dave", password_hash: p })
 
     Repo.delete_all(Task)
-    Repo.insert!(%Task{ user_id: a.id, title: "Hi, I'm Alice", description: "Hi this is Description", time: 15, completed: "Yes"})
-    Repo.insert!(%Task{ user_id: b.id, title: "Hi, I'm Bob", description: "Hi this is Description", time: 30, completed: "No" })
-    Repo.insert!(%Task{ user_id: b.id, title: "Hi, I'm Bob Again", description: "Hi this is Description", time: 90, completed: "No"})
-    Repo.insert!(%Task{ user_id: c.id, title: "Hi, I'm Carol", description: "Hi this is Description", time: 0, completed: "Yes"})
-    Repo.insert!(%Task{ user_id: d.id, title: "Hi, I'm Dave", description: "Hi this is Description", time: 45, completed: "No"})
   end
 end
 
