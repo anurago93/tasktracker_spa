@@ -20,6 +20,8 @@ function RegisterForm(props) {
   function submit(ev) {
     var reg_form = {name: props.form.name, password: props.form.password}
     api.register_user(reg_form);
+    document.getElementById("regForm").className = "hidden";
+    alert("You have successfully registered. Please login to use Task Tracker!!");
   }
 
   function clear(ev) {
@@ -28,7 +30,7 @@ function RegisterForm(props) {
     });
   }
 
-  return <div style={{padding: "4ex"}}>
+  return <div id="regForm" style={{padding: "4ex"}}>
     <h2>Register</h2>
     <FormGroup>
       <Label for="name">Enter the user name</Label>

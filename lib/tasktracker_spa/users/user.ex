@@ -16,7 +16,7 @@ defmodule TasktrackerSpa.Users.User do
     user
     |> cast(attrs, [:name, :password])
     |> put_pass_hash()
-    |> validate_required([:name])
+    |> validate_required([:name, :password_hash])
   end
 
   def put_pass_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do

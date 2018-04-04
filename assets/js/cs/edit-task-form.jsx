@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup, Label, Input, Form } from 'reactstrap';
 import api from '../api';
 
 function EditTaskForm(props) {
@@ -34,6 +34,7 @@ function EditTaskForm(props) {
   let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.name}>{uu.name}</option>);
   return <div style={{padding: "4ex"}}>
     <h2>Edit Task</h2>
+    <Form onSubmit={submit}>
     <FormGroup>
       <Input type="hidden" name="user_id" value={props.editform.user_id} onChange={update} />
     </FormGroup>
@@ -53,7 +54,7 @@ function EditTaskForm(props) {
     </FormGroup>
     <FormGroup>
       <Label for="time">Time Spent</Label>
-      <Input type="number" min="0" step="15" name="time" value={props.editform.time || 0} onChange={update} />
+      <Input type="number" min="0" step="15" name="time" value={props.editform.time} onChange={update} />
     </FormGroup>
     <FormGroup>
       <Label for="completed">Completed</Label>
@@ -62,8 +63,11 @@ function EditTaskForm(props) {
         <option>Yes</option>
       </Input>   
     </FormGroup>
-    <Button onClick={submit} color="primary">Edit Task</Button> &nbsp;
+    <FormGroup>
+    <Button type="submit" color="primary">Edit Task</Button> &nbsp;
     <Button className="btn btn-danger"onClick={clear}>Cancel</Button>
+    </FormGroup>
+    </Form>
   </div>;
   }
   else
